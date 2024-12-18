@@ -1,0 +1,11 @@
+﻿  Application.cpp
+Application.obj : error LNK2019: unresolved external symbol __imp_glClear referenced in function main
+Application.obj : error LNK2019: unresolved external symbol glfwInit referenced in function main
+Application.obj : error LNK2019: unresolved external symbol glfwTerminate referenced in function main
+Application.obj : error LNK2019: unresolved external symbol glfwCreateWindow referenced in function main
+Application.obj : error LNK2019: unresolved external symbol glfwWindowShouldClose referenced in function main
+Application.obj : error LNK2019: unresolved external symbol glfwPollEvents referenced in function main
+Application.obj : error LNK2019: unresolved external symbol glfwMakeContextCurrent referenced in function main
+Application.obj : error LNK2019: unresolved external symbol glfwSwapBuffers referenced in function main
+C:\Users\caiov\source\repos\OpenGLDemo\Dependencies\GLFW\lib-vc2022\glfw3.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
+C:\Users\caiov\source\repos\OpenGLDemo\x64\Debug\OpenGLDemo.exe : fatal error LNK1120: 8 unresolved externals
