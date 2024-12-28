@@ -17,40 +17,40 @@ namespace test {
 		//Vertex buffer - Cube!
 		float positions[] = {
 			// Face 1
-			-0.5f, -0.5f, -0.5f, /* <--Positions */ 0.0f, 0.0f, /* <--TexCoords */ // Index - 0
-			 0.5f, -0.5f, -0.5f, /* <--Positions */ 1.0f, 0.0f,	/* <--TexCoords */ // Index - 1
-			 0.5f,  0.5f, -0.5f, /* <--Positions */ 1.0f, 1.0f,	/* <--TexCoords */ // Index - 2
-			-0.5f,  0.5f, -0.5f, /* <--Positions */ 0.0f, 1.0f,	/* <--TexCoords */ // Index - 3
+			-0.5f, -0.5f, -0.5f, /* <--Positions */ 0.0f, 0.0f, /* <--TexCoords */ 0.0f, /* <--TexIndex */ // Index - 0
+			 0.5f, -0.5f, -0.5f, /* <--Positions */ 1.0f, 0.0f,	/* <--TexCoords */ 0.0f, /* <--TexIndex */ // Index - 1
+			 0.5f,  0.5f, -0.5f, /* <--Positions */ 1.0f, 1.0f,	/* <--TexCoords */ 0.0f, /* <--TexIndex */ // Index - 2
+			-0.5f,  0.5f, -0.5f, /* <--Positions */ 0.0f, 1.0f,	/* <--TexCoords */ 0.0f, /* <--TexIndex */ // Index - 3
 
 			// Face 2
-			-0.5f, -0.5f,  0.5f, /* <--Positions */ 0.0f, 0.0f, /* <--TexCoords */ // Index - 4
-			 0.5f, -0.5f,  0.5f, /* <--Positions */ 1.0f, 0.0f,	/* <--TexCoords */ // Index - 5
-			 0.5f,  0.5f,  0.5f, /* <--Positions */ 1.0f, 1.0f,	/* <--TexCoords */ // Index - 6
-			-0.5f,  0.5f,  0.5f, /* <--Positions */ 0.0f, 1.0f,	/* <--TexCoords */ // Index - 7
+			-0.5f, -0.5f,  0.5f, /* <--Positions */ 0.0f, 0.0f, /* <--TexCoords */ 1.0f, /* <--TexIndex */ // Index - 4
+			 0.5f, -0.5f,  0.5f, /* <--Positions */ 1.0f, 0.0f,	/* <--TexCoords */ 1.0f, /* <--TexIndex */ // Index - 5
+			 0.5f,  0.5f,  0.5f, /* <--Positions */ 1.0f, 1.0f,	/* <--TexCoords */ 1.0f, /* <--TexIndex */ // Index - 6
+			-0.5f,  0.5f,  0.5f, /* <--Positions */ 0.0f, 1.0f,	/* <--TexCoords */ 1.0f, /* <--TexIndex */ // Index - 7
 
 			// Face 3
-			-0.5f,  0.5f,  0.5f, /* <--Positions */ 1.0f, 0.0f, /* <--TexCoords */ // Index - 8
-			-0.5f,  0.5f, -0.5f, /* <--Positions */ 1.0f, 1.0f, /* <--TexCoords */ // Index - 9
-			-0.5f, -0.5f, -0.5f, /* <--Positions */ 0.0f, 1.0f, /* <--TexCoords */ // Index - 10
-			-0.5f, -0.5f,  0.5f, /* <--Positions */ 0.0f, 0.0f, /* <--TexCoords */ // Index - 11
+			-0.5f,  0.5f,  0.5f, /* <--Positions */ 1.0f, 0.0f, /* <--TexCoords */ 1.0f, /* <--TexIndex */ // Index - 8
+			-0.5f,  0.5f, -0.5f, /* <--Positions */ 1.0f, 1.0f, /* <--TexCoords */ 1.0f, /* <--TexIndex */ // Index - 9
+			-0.5f, -0.5f, -0.5f, /* <--Positions */ 0.0f, 1.0f, /* <--TexCoords */ 1.0f, /* <--TexIndex */ // Index - 10
+			-0.5f, -0.5f,  0.5f, /* <--Positions */ 0.0f, 0.0f, /* <--TexCoords */ 1.0f, /* <--TexIndex */ // Index - 11
 
 			// Face 4
-			 0.5f,  0.5f,  0.5f, /* <--Positions */ 1.0f, 0.0f, /* <--TexCoords */ // Index - 12
-			 0.5f,  0.5f, -0.5f, /* <--Positions */ 1.0f, 1.0f, /* <--TexCoords */ // Index - 13
-			 0.5f, -0.5f, -0.5f, /* <--Positions */ 0.0f, 1.0f, /* <--TexCoords */ // Index - 14
-			 0.5f, -0.5f,  0.5f, /* <--Positions */ 0.0f, 0.0f, /* <--TexCoords */ // Index - 15
+			 0.5f,  0.5f,  0.5f, /* <--Positions */ 1.0f, 0.0f, /* <--TexCoords */ 1.0f, /* <--TexIndex */ // Index - 12
+			 0.5f,  0.5f, -0.5f, /* <--Positions */ 1.0f, 1.0f, /* <--TexCoords */ 1.0f, /* <--TexIndex */ // Index - 13
+			 0.5f, -0.5f, -0.5f, /* <--Positions */ 0.0f, 1.0f, /* <--TexCoords */ 1.0f, /* <--TexIndex */ // Index - 14
+			 0.5f, -0.5f,  0.5f, /* <--Positions */ 0.0f, 0.0f, /* <--TexCoords */ 1.0f, /* <--TexIndex */ // Index - 15
 
 			 // Face 5 
-			-0.5f, -0.5f, -0.5f, /* <--Positions */ 0.0f, 1.0f, /* <--TexCoords */ // Index - 16
-			 0.5f, -0.5f, -0.5f, /* <--Positions */ 1.0f, 1.0f, /* <--TexCoords */ // Index - 17
-			 0.5f, -0.5f,  0.5f, /* <--Positions */ 1.0f, 0.0f, /* <--TexCoords */ // Index - 18
-			-0.5f, -0.5f,  0.5f, /* <--Positions */ 0.0f, 0.0f,	/* <--TexCoords */ // Index - 19
+			-0.5f, -0.5f, -0.5f, /* <--Positions */ 0.0f, 1.0f, /* <--TexCoords */ 1.0f, /* <--TexIndex */ // Index - 16
+			 0.5f, -0.5f, -0.5f, /* <--Positions */ 1.0f, 1.0f, /* <--TexCoords */ 1.0f, /* <--TexIndex */ // Index - 17
+			 0.5f, -0.5f,  0.5f, /* <--Positions */ 1.0f, 0.0f, /* <--TexCoords */ 1.0f, /* <--TexIndex */ // Index - 18
+			-0.5f, -0.5f,  0.5f, /* <--Positions */ 0.0f, 0.0f,	/* <--TexCoords */ 1.0f, /* <--TexIndex */ // Index - 19
 
 			// Face 6
-			-0.5f,  0.5f, -0.5f, /* <--Positions */ 0.0f, 1.0f, /* <--TexCoords */ // Index - 20
-			 0.5f,  0.5f, -0.5f, /* <--Positions */ 1.0f, 1.0f, /* <--TexCoords */ // Index - 21
-			 0.5f,  0.5f,  0.5f, /* <--Positions */ 1.0f, 0.0f, /* <--TexCoords */ // Index - 22
-			-0.5f,  0.5f,  0.5f, /* <--Positions */ 0.0f, 0.0f, /* <--TexCoords */ // Index - 23
+			-0.5f,  0.5f, -0.5f, /* <--Positions */ 0.0f, 1.0f, /* <--TexCoords */ 1.0f, /* <--TexIndex */ // Index - 20
+			 0.5f,  0.5f, -0.5f, /* <--Positions */ 1.0f, 1.0f, /* <--TexCoords */ 1.0f, /* <--TexIndex */ // Index - 21
+			 0.5f,  0.5f,  0.5f, /* <--Positions */ 1.0f, 0.0f, /* <--TexCoords */ 1.0f, /* <--TexIndex */ // Index - 22
+			-0.5f,  0.5f,  0.5f, /* <--Positions */ 0.0f, 0.0f, /* <--TexCoords */ 1.0f, /* <--TexIndex */ // Index - 23
 		};
 
 		// Index buffer
@@ -70,20 +70,25 @@ namespace test {
 
 		m_VAO = std::make_unique<VertexArray>();
 		
-		m_VertexBuffer = std::make_unique<VertexBuffer>(positions, 24 * 5 * sizeof(float));
+		m_VertexBuffer = std::make_unique<VertexBuffer>(positions, 24 * 6 * sizeof(float)); // 24 vertices * 6 float attribs
 		VertexBufferLayout layout;
-		layout.Push<float>(3);
-		layout.Push<float>(2);
+		layout.Push<float>(3); // Positions
+		layout.Push<float>(2); // Texture Coords
+		layout.Push<float>(1); // Texture Index
 		m_VAO->AddBuffer(*m_VertexBuffer, layout);
 
 		m_IndexBuffer = std::make_unique<IndexBuffer>(indices, 36);
 
 		m_Shader = std::make_unique<Shader>("res/shaders/Basic.shader");
 		m_Shader->Bind();
-		m_Shader->SetUniform4f("u_Color", 0.2f, 0.3f, 0.8f, 1.0f);
 
-		m_Texture = std::make_unique<Texture>("res/textures/bnnuy.png");
-		m_Shader->SetUniform1i("u_Texture", 0);
+		// Load Textures
+		m_Textures[0] = std::make_unique<Texture>("res/textures/test_tex_face.png");
+		m_Textures[1] = std::make_unique<Texture>("res/textures/test_tex_side.png");
+
+		// Set Uniform Textures array
+		int samplers[3] = { 0, 1 };
+		m_Shader->SetUniform1iv("u_Textures", 2, samplers);
 	}
 
 	TestGeometry3D::~TestGeometry3D()
@@ -102,7 +107,9 @@ namespace test {
 
 		Renderer renderer;
 
-		m_Texture->Bind();
+		// Bind textures to different slots
+		m_Textures[0]->Bind(0);
+		m_Textures[1]->Bind(1);
 
 		{
 			// Rotation
