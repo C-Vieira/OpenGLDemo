@@ -1,5 +1,4 @@
-﻿  TestGeometry3D.cpp
-C:\Users\caiov\source\repos\OpenGLDemo\OpenGLDemo\src\VertexArray.h(14,47): warning C4114: same type qualifier used more than once
-  (compiling source file 'src/tests/TestGeometry3D.cpp')
-  
+﻿  Renderer.cpp
+  TestGeometry3D.cpp
+  Generating Code...
   OpenGLDemo.vcxproj -> C:\Users\caiov\source\repos\OpenGLDemo\Debug\OpenGLDemo.exe

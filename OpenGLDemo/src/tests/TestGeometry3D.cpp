@@ -15,43 +15,7 @@ namespace test {
 		m_Rotationx(glm::radians(0.0f)), m_Rotationy(glm::radians(0.0f)), m_Rotationz(glm::radians(0.0f))
 	{
 		//Vertex buffer - Cube!
-		float positions[] = {
-			// Face 1
-			-0.5f, -0.5f, -0.5f, /* <--Positions */ 0.0f, 0.0f, /* <--TexCoords */ 0.0f, /* <--TexIndex */ // Index - 0
-			 0.5f, -0.5f, -0.5f, /* <--Positions */ 1.0f, 0.0f,	/* <--TexCoords */ 0.0f, /* <--TexIndex */ // Index - 1
-			 0.5f,  0.5f, -0.5f, /* <--Positions */ 1.0f, 1.0f,	/* <--TexCoords */ 0.0f, /* <--TexIndex */ // Index - 2
-			-0.5f,  0.5f, -0.5f, /* <--Positions */ 0.0f, 1.0f,	/* <--TexCoords */ 0.0f, /* <--TexIndex */ // Index - 3
-
-			// Face 2
-			-0.5f, -0.5f,  0.5f, /* <--Positions */ 0.0f, 0.0f, /* <--TexCoords */ 1.0f, /* <--TexIndex */ // Index - 4
-			 0.5f, -0.5f,  0.5f, /* <--Positions */ 1.0f, 0.0f,	/* <--TexCoords */ 1.0f, /* <--TexIndex */ // Index - 5
-			 0.5f,  0.5f,  0.5f, /* <--Positions */ 1.0f, 1.0f,	/* <--TexCoords */ 1.0f, /* <--TexIndex */ // Index - 6
-			-0.5f,  0.5f,  0.5f, /* <--Positions */ 0.0f, 1.0f,	/* <--TexCoords */ 1.0f, /* <--TexIndex */ // Index - 7
-
-			// Face 3
-			-0.5f,  0.5f,  0.5f, /* <--Positions */ 1.0f, 0.0f, /* <--TexCoords */ 1.0f, /* <--TexIndex */ // Index - 8
-			-0.5f,  0.5f, -0.5f, /* <--Positions */ 1.0f, 1.0f, /* <--TexCoords */ 1.0f, /* <--TexIndex */ // Index - 9
-			-0.5f, -0.5f, -0.5f, /* <--Positions */ 0.0f, 1.0f, /* <--TexCoords */ 1.0f, /* <--TexIndex */ // Index - 10
-			-0.5f, -0.5f,  0.5f, /* <--Positions */ 0.0f, 0.0f, /* <--TexCoords */ 1.0f, /* <--TexIndex */ // Index - 11
-
-			// Face 4
-			 0.5f,  0.5f,  0.5f, /* <--Positions */ 1.0f, 0.0f, /* <--TexCoords */ 1.0f, /* <--TexIndex */ // Index - 12
-			 0.5f,  0.5f, -0.5f, /* <--Positions */ 1.0f, 1.0f, /* <--TexCoords */ 1.0f, /* <--TexIndex */ // Index - 13
-			 0.5f, -0.5f, -0.5f, /* <--Positions */ 0.0f, 1.0f, /* <--TexCoords */ 1.0f, /* <--TexIndex */ // Index - 14
-			 0.5f, -0.5f,  0.5f, /* <--Positions */ 0.0f, 0.0f, /* <--TexCoords */ 1.0f, /* <--TexIndex */ // Index - 15
-
-			 // Face 5 
-			-0.5f, -0.5f, -0.5f, /* <--Positions */ 0.0f, 1.0f, /* <--TexCoords */ 1.0f, /* <--TexIndex */ // Index - 16
-			 0.5f, -0.5f, -0.5f, /* <--Positions */ 1.0f, 1.0f, /* <--TexCoords */ 1.0f, /* <--TexIndex */ // Index - 17
-			 0.5f, -0.5f,  0.5f, /* <--Positions */ 1.0f, 0.0f, /* <--TexCoords */ 1.0f, /* <--TexIndex */ // Index - 18
-			-0.5f, -0.5f,  0.5f, /* <--Positions */ 0.0f, 0.0f,	/* <--TexCoords */ 1.0f, /* <--TexIndex */ // Index - 19
-
-			// Face 6
-			-0.5f,  0.5f, -0.5f, /* <--Positions */ 0.0f, 1.0f, /* <--TexCoords */ 1.0f, /* <--TexIndex */ // Index - 20
-			 0.5f,  0.5f, -0.5f, /* <--Positions */ 1.0f, 1.0f, /* <--TexCoords */ 1.0f, /* <--TexIndex */ // Index - 21
-			 0.5f,  0.5f,  0.5f, /* <--Positions */ 1.0f, 0.0f, /* <--TexCoords */ 1.0f, /* <--TexIndex */ // Index - 22
-			-0.5f,  0.5f,  0.5f, /* <--Positions */ 0.0f, 0.0f, /* <--TexCoords */ 1.0f, /* <--TexIndex */ // Index - 23
-		};
+		// Gone...
 
 		// Index buffer
 		unsigned int indices[] = {
@@ -70,12 +34,16 @@ namespace test {
 
 		m_VAO = std::make_unique<VertexArray>();
 		
-		m_VertexBuffer = std::make_unique<VertexBuffer>(positions, 24 * 6 * sizeof(float)); // 24 vertices * 6 float attribs
-		VertexBufferLayout layout;
+		//m_VertexBuffer = std::make_unique<VertexBuffer>(positions, 24 * 6 * sizeof(float)); // 24 vertices * 6 float attribs
+
+		m_VertexBuffer = std::make_unique<VertexBuffer>(24);
+
+		/*VertexBufferLayout layout;
 		layout.Push<float>(3); // Positions
 		layout.Push<float>(2); // Texture Coords
-		layout.Push<float>(1); // Texture Index
-		m_VAO->AddBuffer(*m_VertexBuffer, layout);
+		layout.Push<float>(1);*/ // Texture Index
+
+		m_VAO->AddBuffer(*m_VertexBuffer);
 
 		m_IndexBuffer = std::make_unique<IndexBuffer>(indices, 36);
 
@@ -86,7 +54,7 @@ namespace test {
 		m_Textures[0] = std::make_unique<Texture>("res/textures/test_tex_face.png");
 		m_Textures[1] = std::make_unique<Texture>("res/textures/test_tex_side.png");
 
-		// Set Uniform Textures array
+		// Set Uniform Texture samplers array
 		int samplers[3] = { 0, 1 };
 		m_Shader->SetUniform1iv("u_Textures", 2, samplers);
 	}
@@ -106,6 +74,33 @@ namespace test {
 		GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 
 		Renderer renderer;
+
+		// Create Quads
+		auto q1 = CreateQuad(-0.5f, -0.5f, 0.0f);
+		auto q2 = CreateQuad(-0.5f, -0.5f, 1.0f);
+		auto q3 = CreateQuad(-0.5f,  0.5f, 1.0f);
+		auto q4 = CreateQuad( 0.5f,  0.5f, 1.0f);
+		auto q5 = CreateQuad(-0.5f, -0.5f, 1.0f);
+		auto q6 = CreateQuad(-0.5f,  0.5f, 1.0f);
+
+		// Allocate buffer memory
+		Vertex vertices[24];
+		auto quadSize = q1.size();
+		memcpy(vertices, q1.data(), q1.size() * sizeof(Vertex));
+		memcpy(vertices + quadSize, q2.data(), q2.size() * sizeof(Vertex));
+
+		memcpy(vertices + quadSize * 2, q3.data(), q3.size() * sizeof(Vertex));
+		memcpy(vertices + quadSize * 3, q4.data(), q4.size() * sizeof(Vertex));
+
+		memcpy(vertices + quadSize * 4, q5.data(), q5.size() * sizeof(Vertex));
+		memcpy(vertices + quadSize * 5, q6.data(), q6.size() * sizeof(Vertex));
+
+		// Arrange quads into a cube shape
+		CreateCube(vertices);
+
+		// Bind new Vertex Buffer data
+		m_VertexBuffer->Bind();
+		GLCall(glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices));
 
 		// Bind textures to different slots
 		m_Textures[0]->Bind(0);

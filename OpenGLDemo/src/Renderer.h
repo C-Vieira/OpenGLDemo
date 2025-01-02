@@ -6,14 +6,25 @@
 #include "IndexBuffer.h"
 #include "Shader.h"
 
+#include <array>
+
 // Macros
 #define ASSERT(x) if(!(x)) __debugbreak();
 #define GLCall(x) GLClearError();\
     x;\
     ASSERT(GLLogCall(#x, __FILE__, __LINE__))
 
+struct Vertex {
+    glm::vec3 Position;
+    glm::vec2 TexCoords;
+    float TexID;
+};
+
 void GLClearError();
 bool GLLogCall(const char* function, const char* file, int line);
+
+std::array<Vertex, 4> CreateQuad(float x, float y, float textureID);
+void CreateCube(Vertex* vertices);
 
 class Renderer {
 public:
