@@ -34,7 +34,7 @@ int main(void)
         return -1;
 
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(640, 480, "OpenGLDemo", NULL, NULL);
+    window = glfwCreateWindow(800, 600, "OpenGLDemo", NULL, NULL); // Old: 640 x 480
     if (!window)
     {
         glfwTerminate();

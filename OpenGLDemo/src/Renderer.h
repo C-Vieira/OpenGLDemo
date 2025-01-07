@@ -23,8 +23,8 @@ struct Vertex {
 void GLClearError();
 bool GLLogCall(const char* function, const char* file, int line);
 
-std::array<Vertex, 4> CreateQuad(float x, float y, float textureID);
-void CreateCube(Vertex* vertices);
+Vertex* CreateQuad(Vertex* target, float x, float y, float textureID);
+void CreateCube(Vertex* vertices, float xoffset, float yoffset);
 
 class Renderer {
 public:

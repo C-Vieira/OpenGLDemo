@@ -22,7 +22,7 @@ namespace test {
 		std::unique_ptr<VertexBuffer> m_VertexBuffer;
 		std::unique_ptr<IndexBuffer> m_IndexBuffer;
 		std::unique_ptr<Shader> m_Shader;
-		std::unique_ptr<Texture> m_Textures[2];
+		std::unique_ptr<Texture> m_Textures[16];
 
 		glm::mat4 m_Proj, m_View;
 		float m_Rotationx, m_Rotationy, m_Rotationz;
