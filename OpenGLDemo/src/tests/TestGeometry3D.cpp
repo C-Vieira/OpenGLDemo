@@ -11,7 +11,7 @@
 namespace test {
 	TestGeometry3D::TestGeometry3D()
 		: m_Proj(glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f)),
-		m_View(glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -9.0f))),
+		m_View(glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -3.0f))),
 		m_Rotationx(glm::radians(0.0f)), m_Rotationy(glm::radians(0.0f)), m_Rotationz(glm::radians(0.0f))
 	{
 		GLCall(glEnable(GL_BLEND));
@@ -19,7 +19,7 @@ namespace test {
 
 		GLCall(glEnable(GL_DEPTH_TEST));
 
-		const rsize_t MaxCubeCount = 10;
+		const rsize_t MaxCubeCount = 1;
 		const rsize_t MaxQuadCount = 6 * MaxCubeCount;
 		const rsize_t MaxVertexCount = MaxQuadCount * 4 * MaxCubeCount;
 		const rsize_t MaxIndexCount = MaxQuadCount * 6 * MaxCubeCount;
@@ -51,29 +51,11 @@ namespace test {
 		m_Shader->Bind();
 
 		// Load Textures
-		m_Textures[0]  = std::make_unique<Texture>("res/textures/test_tex_face1-front.png");
-		m_Textures[1]  = std::make_unique<Texture>("res/textures/test_tex_face1-side.png");
-		m_Textures[2]  = std::make_unique<Texture>("res/textures/test_tex_face1-top.png");
-		m_Textures[3]  = std::make_unique<Texture>("res/textures/test_tex_face1-bottom.png");
-					   
-		m_Textures[4]  = std::make_unique<Texture>("res/textures/test_tex_face2-front.png");
-		m_Textures[5]  = std::make_unique<Texture>("res/textures/test_tex_face2-side.png");
-		m_Textures[6]  = std::make_unique<Texture>("res/textures/test_tex_face2-top.png");
-		m_Textures[7]  = std::make_unique<Texture>("res/textures/test_tex_face2-bottom.png");
-					   
-		m_Textures[8]  = std::make_unique<Texture>("res/textures/test_tex_face3-front.png");
-		m_Textures[9]  = std::make_unique<Texture>("res/textures/test_tex_face3-side.png");
-		m_Textures[10] = std::make_unique<Texture>("res/textures/test_tex_face3-top.png");
-		m_Textures[11] = std::make_unique<Texture>("res/textures/test_tex_face3-bottom.png");
-
-		m_Textures[12] = std::make_unique<Texture>("res/textures/test_tex_face4-front.png");
-		m_Textures[13] = std::make_unique<Texture>("res/textures/test_tex_face4-side.png");
-		m_Textures[14] = std::make_unique<Texture>("res/textures/test_tex_face4-top.png");
-		m_Textures[15] = std::make_unique<Texture>("res/textures/test_tex_face4-bottom.png");
+		m_Textures[0]  = std::make_unique<Texture>("res/textures/bnnuy.png");
 
 		// Set Uniform Texture samplers array
-		int samplers[16] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
-		m_Shader->SetUniform1iv("u_Textures", 16, samplers);
+		int samplers[16] = { 0 };
+		m_Shader->SetUniform1iv("u_Textures", 1, samplers);
 	}
 
 	TestGeometry3D::~TestGeometry3D()
@@ -92,24 +74,19 @@ namespace test {
 
 		Renderer renderer;
 
-		std::array<Vertex, 24 * 10> vertices;
+		std::array<Vertex, 24> vertices;
 		Vertex* buffer = vertices.data();
 
 		// Create Quads
-		for (int i = 0, j = 0; i < 4; i++, j += 4) {
-			buffer = CreateQuad(buffer, -0.5f, -0.5f, 0.0f + j);
-			buffer = CreateQuad(buffer, -0.5f, -0.5f, 3.0f + j);
-			buffer = CreateQuad(buffer, -0.5f,  0.5f, 1.0f + j);
-			buffer = CreateQuad(buffer,  0.5f,  0.5f, 1.0f + j);
-			buffer = CreateQuad(buffer, -0.5f, -0.5f, 3.0f + j);
-			buffer = CreateQuad(buffer, -0.5f,  0.5f, 2.0f + j);
-		}
+		buffer = CreateQuad(buffer, -0.5f, -0.5f, 0.0f);
+		buffer = CreateQuad(buffer, -0.5f, -0.5f, 0.0f);
+		buffer = CreateQuad(buffer, -0.5f,  0.5f, 0.0f);
+		buffer = CreateQuad(buffer,  0.5f,  0.5f, 0.0f);
+		buffer = CreateQuad(buffer, -0.5f, -0.5f, 0.0f);
+		buffer = CreateQuad(buffer, -0.5f,  0.5f, 0.0f);
 
 		// Arrange quads into a cube shape
 		CreateCube(vertices.data(), 0.0f, 0.0f);
-		CreateCube(vertices.data() + 24, 1.0f, 1.0f);
-		CreateCube(vertices.data() + 24 * 2, -1.0f, -1.0f);
-		CreateCube(vertices.data() + 24 * 3, 1.0f, -1.0f);
 
 		// Bind new Vertex Buffer data
 		m_VertexBuffer->Bind();
@@ -117,9 +94,7 @@ namespace test {
 		GLCall(glBufferSubData(GL_ARRAY_BUFFER, 0, vertices.size() * sizeof(Vertex), vertices.data()));
 
 		// Bind textures to different slots
-		for (int i = 0; i < 16; i++) {
-			m_Textures[i]->Bind(i);
-		}
+		m_Textures[0]->Bind(0);
 
 		{
 			// Rotation

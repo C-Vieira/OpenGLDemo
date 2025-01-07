@@ -9,6 +9,7 @@ C:\Users\caiov\source\repos\OpenGLDemo\OpenGLDemo\src\libs\stb_image\stb_image.c
 C:\Users\caiov\source\repos\OpenGLDemo\OpenGLDemo\src\Renderer.cpp;C:\Users\caiov\source\repos\OpenGLDemo\OpenGLDemo\Debug\Renderer.obj
 C:\Users\caiov\source\repos\OpenGLDemo\OpenGLDemo\src\Shader.cpp;C:\Users\caiov\source\repos\OpenGLDemo\OpenGLDemo\Debug\Shader.obj
 C:\Users\caiov\source\repos\OpenGLDemo\OpenGLDemo\src\tests\Test.cpp;C:\Users\caiov\source\repos\OpenGLDemo\OpenGLDemo\Debug\Test.obj
+C:\Users\caiov\source\repos\OpenGLDemo\OpenGLDemo\src\tests\TestBatchRendering.cpp;C:\Users\caiov\source\repos\OpenGLDemo\OpenGLDemo\Debug\TestBatchRendering.obj
 C:\Users\caiov\source\repos\OpenGLDemo\OpenGLDemo\src\tests\TestClearColor.cpp;C:\Users\caiov\source\repos\OpenGLDemo\OpenGLDemo\Debug\TestClearColor.obj
 C:\Users\caiov\source\repos\OpenGLDemo\OpenGLDemo\src\tests\TestGeometry3D.cpp;C:\Users\caiov\source\repos\OpenGLDemo\OpenGLDemo\Debug\TestGeometry3D.obj
 C:\Users\caiov\source\repos\OpenGLDemo\OpenGLDemo\src\tests\TestTexture2D.cpp;C:\Users\caiov\source\repos\OpenGLDemo\OpenGLDemo\Debug\TestTexture2D.obj
