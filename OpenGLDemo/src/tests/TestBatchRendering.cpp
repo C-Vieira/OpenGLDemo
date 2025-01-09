@@ -8,12 +8,32 @@
 
 #include <GLFW/glfw3.h>
 
+#include "Camera.h"
+
+// Camera
+Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+float lastX = 400, lastY = 300;
+bool firtsMouse = true;
+
+void ProcessCameraInput(GLFWwindow* window);
+void mouse_callback(GLFWwindow* window, double xpos, double ypos);
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
+
+// Timing
+float deltaTime = 0.0f;
+float lastFrame = 0.0f;
+
 namespace test {
 	TestBatchRendering::TestBatchRendering()
 		: m_Proj(glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f)),
 		m_View(glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -9.0f))),
 		m_Rotationx(glm::radians(0.0f)), m_Rotationy(glm::radians(0.0f)), m_Rotationz(glm::radians(0.0f))
 	{
+		// CallBacks and Input Mode for Camera
+		glfwSetInputMode(glfwGetCurrentContext(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+		glfwSetCursorPosCallback(glfwGetCurrentContext(), mouse_callback);
+		glfwSetScrollCallback(glfwGetCurrentContext(), scroll_callback);
+
 		GLCall(glEnable(GL_BLEND));
 		GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
@@ -78,6 +98,7 @@ namespace test {
 
 	TestBatchRendering::~TestBatchRendering()
 	{
+		glfwSetInputMode(glfwGetCurrentContext(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 		GLCall(glDisable(GL_DEPTH_TEST));
 	}
 
@@ -127,9 +148,23 @@ namespace test {
 
 			model = glm::rotate(model, (float)glfwGetTime() * glm::radians(10.0f), glm::vec3(0.5f, 1.0f, 0.0f));
 
-			model = glm::rotate(model, m_Rotationy, glm::vec3(1.0f, 0.0f, 0.0f));
-			model = glm::rotate(model, m_Rotationx, glm::vec3(0.0f, 1.0f, 0.0f));
-			model = glm::rotate(model, m_Rotationz, glm::vec3(0.0f, 0.0f, 1.0f));
+			//model = glm::rotate(model, m_Rotationy, glm::vec3(1.0f, 0.0f, 0.0f));
+			//model = glm::rotate(model, m_Rotationx, glm::vec3(0.0f, 1.0f, 0.0f));
+			//model = glm::rotate(model, m_Rotationz, glm::vec3(0.0f, 0.0f, 1.0f));
+
+			// Per-Frame Time Logic
+			float currentFrame = static_cast<float>(glfwGetTime());
+			deltaTime = currentFrame - lastFrame;
+			lastFrame = currentFrame;
+
+			// Input
+			ProcessCameraInput(glfwGetCurrentContext());
+
+			// Camera
+			m_View = camera.GetViewMatrix();
+
+			// Zoom
+			m_Proj = glm::perspective(glm::radians(camera.Zoom), 800.0f / 600.0f, 0.1f, 100.0f);
 
 			glm::mat4 mvp = m_Proj * m_View * model;
 			m_Shader->Bind();
@@ -141,9 +176,51 @@ namespace test {
 
 	void TestBatchRendering::OnImGuiRender()
 	{
-		ImGui::SliderFloat("Rotation X", &m_Rotationx, glm::radians(0.0f), glm::radians(360.0f));
-		ImGui::SliderFloat("Rotation Y", &m_Rotationy, glm::radians(0.0f), glm::radians(360.0f));
-		ImGui::SliderFloat("Rotation Z", &m_Rotationz, glm::radians(0.0f), glm::radians(360.0f));
+		ImGui::Text("TIP: Press \"F\" to show cursor");
+		ImGui::Text("TIP: Press \"G\" to hide cursor");
 		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 	}
+}
+
+void ProcessCameraInput(GLFWwindow* window) {
+	// Set Cursor Visibility
+	if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS) {
+		glfwSetInputMode(glfwGetCurrentContext(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+		firtsMouse = true;
+	}
+	if(glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS)
+		glfwSetInputMode(glfwGetCurrentContext(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	
+	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+		camera.ProcessKeyBoard(FORWARD, deltaTime);
+	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+		camera.ProcessKeyBoard(BACKWARD, deltaTime);
+	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+		camera.ProcessKeyBoard(LEFT, deltaTime);
+	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+		camera.ProcessKeyBoard(RIGHT, deltaTime);
+}
+
+void mouse_callback(GLFWwindow* window, double xposIn, double yposIn) {
+	float xpos = static_cast<float>(xposIn);
+	float ypos = static_cast<float>(yposIn);
+
+	if (firtsMouse) {
+		lastX = xpos;
+		lastY = ypos;
+		firtsMouse = false;
+	}
+
+	float xoffset = xpos - lastX;
+	float yoffset = lastY - ypos; // Reversed since y coords go from bottom to top
+
+	lastX = xpos;
+	lastY = ypos;
+
+	camera.ProcessMouseMovement(xoffset, yoffset);
+}
+
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
+{
+	camera.ProcessMouseScroll(static_cast<float>(yoffset));
 }

@@ -26,6 +26,14 @@
 #include "tests/TestGeometry3D.h"
 #include "tests/TestBatchRendering.h"
 
+// Method Prototypes
+void ProcessInput(GLFWwindow* window);
+void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+
+// Settings
+const unsigned int SCR_WIDTH  = 800;
+const unsigned int SCR_HEIGHT = 600;
+
 int main(void)
 {
     GLFWwindow* window;
@@ -35,7 +43,7 @@ int main(void)
         return -1;
 
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(800, 600, "OpenGLDemo", NULL, NULL); // Old: 640 x 480
+    window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "OpenGLDemo", NULL, NULL); // Old: 640 x 480
     if (!window)
     {
         glfwTerminate();
@@ -44,6 +52,9 @@ int main(void)
 
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
+
+    /* Set FrameBuffer Size Callback Method */
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
     glfwSwapInterval(1);
 
@@ -74,6 +85,9 @@ int main(void)
         /* Loop until the user closes the window */
         while (!glfwWindowShouldClose(window))
         {
+            /* Input */
+            ProcessInput(window);
+
             /* Render here */
             GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
             renderer.Clear();
@@ -110,4 +124,13 @@ int main(void)
     ImGui::DestroyContext();
     glfwTerminate();
     return 0;
+}
+
+void ProcessInput(GLFWwindow* window) {
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+        glfwSetWindowShouldClose(window, true);
+}
+
+void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
+    glViewport(0, 0, width, height);
 }
