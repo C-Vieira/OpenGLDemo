@@ -24,7 +24,7 @@ void GLClearError();
 bool GLLogCall(const char* function, const char* file, int line);
 
 Vertex* CreateQuad(Vertex* target, float x, float y, float textureID);
-void CreateCube(Vertex* vertices, float xoffset, float yoffset);
+void CreateCube(Vertex* vertices, float xoffset, float yoffset, float zoffset);
 
 class Renderer {
 public:

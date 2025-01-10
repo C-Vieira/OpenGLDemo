@@ -86,7 +86,7 @@ namespace test {
 		buffer = CreateQuad(buffer, -0.5f,  0.5f, 0.0f);
 
 		// Arrange quads into a cube shape
-		CreateCube(vertices.data(), 0.0f, 0.0f);
+		CreateCube(vertices.data(), 0.0f, 0.0f, 0.0f);
 
 		// Bind new Vertex Buffer data
 		m_VertexBuffer->Bind();

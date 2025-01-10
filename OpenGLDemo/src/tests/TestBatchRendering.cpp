@@ -10,6 +10,10 @@
 
 #include "Camera.h"
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
 // Camera
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 float lastX = 400, lastY = 300;
@@ -22,6 +26,15 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 // Timing
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
+
+// Geometry
+const rsize_t MaxCubeCount = 80;
+const rsize_t MaxQuadCount = 6 * MaxCubeCount;
+const rsize_t MaxVertexCount = MaxQuadCount * 4 * MaxCubeCount;
+const rsize_t MaxIndexCount = MaxQuadCount * 6 * MaxCubeCount;
+
+int cubeAmount = 10;
+bool generated = false;
 
 namespace test {
 	TestBatchRendering::TestBatchRendering()
@@ -39,10 +52,7 @@ namespace test {
 
 		GLCall(glEnable(GL_DEPTH_TEST));
 
-		const rsize_t MaxCubeCount = 10;
-		const rsize_t MaxQuadCount = 6 * MaxCubeCount;
-		const rsize_t MaxVertexCount = MaxQuadCount * 4 * MaxCubeCount;
-		const rsize_t MaxIndexCount = MaxQuadCount * 6 * MaxCubeCount;
+		srand(time(NULL));
 
 		// Index buffer
 		unsigned int indices[MaxIndexCount];
@@ -113,29 +123,61 @@ namespace test {
 
 		Renderer renderer;
 
-		std::array<Vertex, 24 * 10> vertices;
-		Vertex* buffer = vertices.data();
+		if (!generated) {
 
-		// Create Quads
-		for (int i = 0, j = 0; i < 4; i++, j += 4) {
-			buffer = CreateQuad(buffer, -0.5f, -0.5f, 0.0f + j);
-			buffer = CreateQuad(buffer, -0.5f, -0.5f, 3.0f + j);
-			buffer = CreateQuad(buffer, -0.5f,  0.5f, 1.0f + j);
-			buffer = CreateQuad(buffer,  0.5f,  0.5f, 1.0f + j);
-			buffer = CreateQuad(buffer, -0.5f, -0.5f, 3.0f + j);
-			buffer = CreateQuad(buffer, -0.5f,  0.5f, 2.0f + j);
+			std::array<Vertex, 24 * MaxCubeCount> vertices;
+			Vertex* buffer = vertices.data();
+
+			// Create Quads
+			for (int i = 0; i < cubeAmount; i++) {
+				int j = rand() % 4;
+				switch (j)
+				{
+				case 0:
+					j = 0;
+					break;
+				case 1:
+					j = 4;
+					break;
+				case 2:
+					j = 8;
+					break;
+				case 3:
+					j = 12;
+					break;
+				}
+
+				buffer = CreateQuad(buffer, -0.5f, -0.5f, 0.0f + j);
+				buffer = CreateQuad(buffer, -0.5f, -0.5f, 3.0f + j);
+				buffer = CreateQuad(buffer, -0.5f,  0.5f, 1.0f + j);
+				buffer = CreateQuad(buffer,  0.5f,  0.5f, 1.0f + j);
+				buffer = CreateQuad(buffer, -0.5f, -0.5f, 3.0f + j);
+				buffer = CreateQuad(buffer, -0.5f,  0.5f, 2.0f + j);
+			}
+
+			for (int i = 0; i < cubeAmount; i++) {
+				int randNegativeX = rand() % 2;
+				int randNegativeY = rand() % 2;
+				int randNegativeZ = rand() % 2;
+
+				int randXOffset = rand() % 21;
+				int randYOffset = rand() % 21;
+				int randZOffset = rand() % 21;
+				
+				if (randNegativeX) randXOffset *= -1;
+				if (randNegativeY) randYOffset *= -1;
+				if (randNegativeZ) randZOffset *= -1;
+
+				CreateCube(vertices.data() + 24 * i, randXOffset, randYOffset, randZOffset);
+			}
+
+			// Bind new Vertex Buffer data
+			m_VertexBuffer->Bind();
+
+			GLCall(glBufferSubData(GL_ARRAY_BUFFER, 0, vertices.size() * sizeof(Vertex), vertices.data()));
+
+			generated = true;
 		}
-
-		// Arrange quads into a cube shape
-		CreateCube(vertices.data(), 0.0f, 0.0f);
-		CreateCube(vertices.data() + 24, 1.0f, 1.0f);
-		CreateCube(vertices.data() + 24 * 2, -1.0f, -1.0f);
-		CreateCube(vertices.data() + 24 * 3, 1.0f, -1.0f);
-
-		// Bind new Vertex Buffer data
-		m_VertexBuffer->Bind();
-
-		GLCall(glBufferSubData(GL_ARRAY_BUFFER, 0, vertices.size() * sizeof(Vertex), vertices.data()));
 
 		// Bind textures to different slots
 		for (int i = 0; i < 16; i++) {
@@ -146,7 +188,7 @@ namespace test {
 			// Rotation
 			glm::mat4 model = glm::mat4(1.0f);
 
-			model = glm::rotate(model, (float)glfwGetTime() * glm::radians(10.0f), glm::vec3(0.5f, 1.0f, 0.0f));
+			//model = glm::rotate(model, (float)glfwGetTime() * glm::radians(10.0f), glm::vec3(0.5f, 1.0f, 0.0f));
 
 			//model = glm::rotate(model, m_Rotationy, glm::vec3(1.0f, 0.0f, 0.0f));
 			//model = glm::rotate(model, m_Rotationx, glm::vec3(0.0f, 1.0f, 0.0f));
@@ -176,6 +218,10 @@ namespace test {
 
 	void TestBatchRendering::OnImGuiRender()
 	{
+		// Regenerate Geometry
+		if (ImGui::Button("Regenerate"))
+			generated = false;
+		ImGui::SliderInt("Cube Amount", &cubeAmount, 0, MaxCubeCount);
 		ImGui::Text("TIP: Press \"F\" to show cursor");
 		ImGui::Text("TIP: Press \"G\" to hide cursor");
 		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);

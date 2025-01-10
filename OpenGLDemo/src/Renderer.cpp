@@ -47,45 +47,45 @@ Vertex* CreateQuad(Vertex* target, float x, float y, float textureID)
 }
 
 // Recieve an array of 24 vertices and arrange their positions into a cube
-void CreateCube(Vertex* vertices, float xoffset, float yoffset)
+void CreateCube(Vertex* vertices, float xoffset, float yoffset, float zoffset)
 {
     if (!vertices) return;
 
     // Face 1
-    vertices[0].Position  = { -0.5f + xoffset, -0.5f + yoffset, -0.5f };
-    vertices[1].Position  = {  0.5f + xoffset, -0.5f + yoffset, -0.5f };
-    vertices[2].Position  = {  0.5f + xoffset,  0.5f + yoffset, -0.5f };
-    vertices[3].Position  = { -0.5f + xoffset,  0.5f + yoffset, -0.5f };
+    vertices[0].Position  = { -0.5f + xoffset, -0.5f + yoffset, -0.5f + zoffset };
+    vertices[1].Position  = {  0.5f + xoffset, -0.5f + yoffset, -0.5f + zoffset };
+    vertices[2].Position  = {  0.5f + xoffset,  0.5f + yoffset, -0.5f + zoffset };
+    vertices[3].Position  = { -0.5f + xoffset,  0.5f + yoffset, -0.5f + zoffset };
                           
     // Face 2             
-    vertices[4].Position  = { -0.5f + xoffset, -0.5f + yoffset,  0.5f };
-    vertices[5].Position  = {  0.5f + xoffset, -0.5f + yoffset,  0.5f };
-    vertices[6].Position  = {  0.5f + xoffset,  0.5f + yoffset,  0.5f };
-    vertices[7].Position  = { -0.5f + xoffset,  0.5f + yoffset,  0.5f };
+    vertices[4].Position  = { -0.5f + xoffset, -0.5f + yoffset,  0.5f + zoffset };
+    vertices[5].Position  = {  0.5f + xoffset, -0.5f + yoffset,  0.5f + zoffset };
+    vertices[6].Position  = {  0.5f + xoffset,  0.5f + yoffset,  0.5f + zoffset };
+    vertices[7].Position  = { -0.5f + xoffset,  0.5f + yoffset,  0.5f + zoffset };
 
     // Face 3
-    vertices[8].Position  = { -0.5f + xoffset,  0.5f + yoffset,  0.5f };
-    vertices[9].Position  = { -0.5f + xoffset,  0.5f + yoffset, -0.5f };
-    vertices[10].Position = { -0.5f + xoffset, -0.5f + yoffset, -0.5f };
-    vertices[11].Position = { -0.5f + xoffset, -0.5f + yoffset,  0.5f };
+    vertices[8].Position  = { -0.5f + xoffset,  0.5f + yoffset,  0.5f + zoffset };
+    vertices[9].Position  = { -0.5f + xoffset,  0.5f + yoffset, -0.5f + zoffset };
+    vertices[10].Position = { -0.5f + xoffset, -0.5f + yoffset, -0.5f + zoffset };
+    vertices[11].Position = { -0.5f + xoffset, -0.5f + yoffset,  0.5f + zoffset };
 
     // Face 4
-    vertices[12].Position = { 0.5f + xoffset,  0.5f + yoffset,  0.5f };
-    vertices[13].Position = { 0.5f + xoffset,  0.5f + yoffset, -0.5f };
-    vertices[14].Position = { 0.5f + xoffset, -0.5f + yoffset, -0.5f };
-    vertices[15].Position = { 0.5f + xoffset, -0.5f + yoffset,  0.5f };
+    vertices[12].Position = { 0.5f + xoffset,  0.5f + yoffset,  0.5f + zoffset };
+    vertices[13].Position = { 0.5f + xoffset,  0.5f + yoffset, -0.5f + zoffset };
+    vertices[14].Position = { 0.5f + xoffset, -0.5f + yoffset, -0.5f + zoffset };
+    vertices[15].Position = { 0.5f + xoffset, -0.5f + yoffset,  0.5f + zoffset };
 
     // Face 5
-    vertices[16].Position = { -0.5f + xoffset, -0.5f + yoffset, -0.5f };
-    vertices[17].Position = {  0.5f + xoffset, -0.5f + yoffset, -0.5f };
-    vertices[18].Position = {  0.5f + xoffset, -0.5f + yoffset,  0.5f };
-    vertices[19].Position = { -0.5f + xoffset, -0.5f + yoffset,  0.5f };
+    vertices[16].Position = { -0.5f + xoffset, -0.5f + yoffset, -0.5f + zoffset };
+    vertices[17].Position = {  0.5f + xoffset, -0.5f + yoffset, -0.5f + zoffset };
+    vertices[18].Position = {  0.5f + xoffset, -0.5f + yoffset,  0.5f + zoffset };
+    vertices[19].Position = { -0.5f + xoffset, -0.5f + yoffset,  0.5f + zoffset };
 
     // Face 6
-    vertices[20].Position = { -0.5f + xoffset,  0.5f + yoffset, -0.5f };
-    vertices[21].Position = {  0.5f + xoffset,  0.5f + yoffset, -0.5f };
-    vertices[22].Position = {  0.5f + xoffset,  0.5f + yoffset,  0.5f };
-    vertices[23].Position = { -0.5f + xoffset,  0.5f + yoffset,  0.5f };
+    vertices[20].Position = { -0.5f + xoffset,  0.5f + yoffset, -0.5f + zoffset };
+    vertices[21].Position = {  0.5f + xoffset,  0.5f + yoffset, -0.5f + zoffset };
+    vertices[22].Position = {  0.5f + xoffset,  0.5f + yoffset,  0.5f + zoffset };
+    vertices[23].Position = { -0.5f + xoffset,  0.5f + yoffset,  0.5f + zoffset };
 
 }
 
