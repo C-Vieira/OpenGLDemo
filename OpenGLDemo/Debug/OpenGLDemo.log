@@ -1,6 +1,2 @@
-﻿  TestBatchRendering.cpp
-C:\Users\caiov\source\repos\OpenGLDemo\OpenGLDemo\src\tests\TestBatchRendering.cpp(55,13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\caiov\source\repos\OpenGLDemo\OpenGLDemo\src\tests\TestBatchRendering.cpp(171,68): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\caiov\source\repos\OpenGLDemo\OpenGLDemo\src\tests\TestBatchRendering.cpp(171,55): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\caiov\source\repos\OpenGLDemo\OpenGLDemo\src\tests\TestBatchRendering.cpp(171,42): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+﻿  TestGeometry3D.cpp
   OpenGLDemo.vcxproj -> C:\Users\caiov\source\repos\OpenGLDemo\Debug\OpenGLDemo.exe
